@@ -43,7 +43,7 @@ soup.ssl_strict = false
 
 -- Set cookie acceptance policy
 cookie_policy = { always = 0, never = 1, no_third_party = 2 }
-soup.accept_policy = cookie_policy.always
+soup.accept_policy = cookie_policy.never
 
 -- List of search engines. Each item must contain a single %s which is
 -- replaced by URI encoded search terms. All other occurances of the percent
@@ -58,8 +58,8 @@ search_engines = {
     wikipedia   = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
 }
 
--- Set google as fallback search engine
-search_engines.default = search_engines.google
+-- Set duckduckgo as fallback search engine
+search_engines.default = search_engines.duckduckgo
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 
