@@ -94,17 +94,22 @@ end
 local mytextclock = awful.widget.textclock()
 
 -- Create a memory widget
+local memory_icon = wibox.widget.imagebox(beautiful.widget_mem)
+local memory_icon_container = wibox.widget.background()
+memory_icon_container:set_bg(beautiful.bg_focus)
+memory_icon_container:set_widget(memory_icon)
 local memory_widget = wibox.widget.textbox()
 local memory_widget_container = wibox.widget.background()
 memory_widget_container:set_bg(beautiful.bg_focus)
 memory_widget_container:set_widget(memory_widget)
 -- Register widget
-vicious.register(memory_widget, vicious.widgets.mem, "$1% ($2MB/$3MB)", 13)
+vicious.register(memory_widget, vicious.widgets.mem, "$1%", 60)
 
 -- Create battery widget
+local battery_icon_widget = wibox.widget.imagebox(beautiful.widget_battery)
 local battery_widget = wibox.widget.textbox()
 -- Register widget
-vicious.register(battery_widget, vicious.widgets.bat, "Bat: $2%", 50, "BAT1")
+vicious.register(battery_widget, vicious.widgets.bat, "$2%", 90, "BAT1")
 
 -- Separators
 local spr = wibox.widget.textbox(' ')
@@ -185,6 +190,7 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
+    left_layout:add(spr)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
@@ -192,12 +198,15 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     --right_layout:add(arrl_dl)
+    right_layout:add(battery_icon_widget)
     right_layout:add(battery_widget)
     right_layout:add(spr)
     right_layout:add(arrl_ld)
+    right_layout:add(memory_icon_container)
     right_layout:add(memory_widget_container)
     right_layout:add(arrl_dl)
     right_layout:add(mytextclock)
+    right_layout:add(arrl_ld)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
