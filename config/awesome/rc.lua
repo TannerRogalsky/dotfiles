@@ -91,7 +91,7 @@ end
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+local mytextclock = awful.widget.textclock()
 
 -- Create a memory widget
 local memory_widget = wibox.widget.textbox()
@@ -99,12 +99,21 @@ local memory_widget_container = wibox.widget.background()
 memory_widget_container:set_bg(beautiful.bg_focus)
 memory_widget_container:set_widget(memory_widget)
 -- Register widget
-vicious.register(memory_widget, vicious.widgets.mem, " $1% ($2MB/$3MB) ", 13)
+vicious.register(memory_widget, vicious.widgets.mem, "$1% ($2MB/$3MB)", 13)
 
 -- Create battery widget
-battery_widget = wibox.widget.textbox()
+local battery_widget = wibox.widget.textbox()
 -- Register widget
-vicious.register(battery_widget, vicious.widgets.bat, " Bat: $2% ", 50, "BAT1")
+vicious.register(battery_widget, vicious.widgets.bat, "Bat: $2%", 50, "BAT1")
+
+-- Separators
+local spr = wibox.widget.textbox(' ')
+local arrl = wibox.widget.imagebox()
+arrl:set_image(beautiful.arrl)
+local arrl_dl = wibox.widget.imagebox()
+arrl_dl:set_image(beautiful.arrl_dl)
+local arrl_ld = wibox.widget.imagebox()
+arrl_ld:set_image(beautiful.arrl_ld)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -182,8 +191,12 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    --right_layout:add(arrl_dl)
     right_layout:add(battery_widget)
+    right_layout:add(spr)
+    right_layout:add(arrl_ld)
     right_layout:add(memory_widget_container)
+    right_layout:add(arrl_dl)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
