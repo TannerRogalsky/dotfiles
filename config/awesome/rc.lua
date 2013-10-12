@@ -90,6 +90,21 @@ end
 -- }}}
 
 -- {{{ Wibox
+-- Create fs widget
+local fs_icon = wibox.widget.imagebox(beautiful.widget_hdd)
+local fs_icon_container = wibox.widget.background()
+fs_icon_container:set_bg(theme.bg_focus)
+fs_icon_container:set_widget(fs_icon)
+local fs_widget = wibox.widget.textbox()
+local fs_widget_container = wibox.widget.background()
+fs_widget_container:set_bg(theme.bg_focus)
+fs_widget_container:set_widget(fs_widget)
+-- Register the fs widget
+vicious.register(fs_widget, vicious.widgets.fs,
+  function(w, args)
+    return args["{/ used_p}"] .. "%"
+  end, 60 * 5)
+
 -- Create a textclock widget
 local mytextclock = awful.widget.textclock()
 
@@ -197,7 +212,10 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    --right_layout:add(arrl_dl)
+    right_layout:add(arrl_ld)
+    right_layout:add(fs_icon_container)
+    right_layout:add(fs_widget_container)
+    right_layout:add(arrl_dl)
     right_layout:add(battery_icon_widget)
     right_layout:add(battery_widget)
     right_layout:add(spr)
