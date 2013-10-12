@@ -51,7 +51,7 @@ soup.accept_policy = cookie_policy.never
 -- it to avoid collisions with lua's string.format characters.
 -- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
-    duckduckgo  = "https://duckduckgo.com/?q=%s",
+    duckduckgo  = "https://duckduckgo.com/html/?q=%s",
     github      = "https://github.com/search?q=%s",
     google      = "https://google.com/search?q=%s",
     imdb        = "http://www.imdb.com/find?s=all&q=%s",
