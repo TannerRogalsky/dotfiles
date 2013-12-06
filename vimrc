@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved
 filetype off                  " required!
+set number
 
 colorscheme Tomorrow-Night-Bright
 syntax on
