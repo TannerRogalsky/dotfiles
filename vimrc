@@ -4,6 +4,10 @@ filetype off                  " required!
 colorscheme Tomorrow-Night-Bright
 syntax on
 
+set colorcolumn=80,120
+set ignorecase
+set smartcase
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
