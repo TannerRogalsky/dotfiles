@@ -1,5 +1,6 @@
 alias g=git
 alias gs="git status"
+alias tmux="tmux -2"
 
 # Pacman alias examples
 alias pacupg='sudo pacman -Syu'        # Synchronize with repositories and then upgrade packages that are out of date on the local system.
